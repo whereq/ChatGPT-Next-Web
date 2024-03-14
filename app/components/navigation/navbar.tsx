@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 
 import { useRouter } from "next/navigation";
 import * as React from "react";
+import { signIn } from "next-auth/react";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -53,6 +55,14 @@ function ResponsiveAppBar() {
     // const href = target.href + '/' + getLang();
     router.push(target);
   };
+
+  const handleNavMenuItem =
+    (menu: string) => (event: React.MouseEvent<HTMLButtonElement>) => {
+      console.log(menu);
+      if (menu === "signin") {
+        signIn("keycloak");
+      }
+    };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -271,11 +281,24 @@ function ResponsiveAppBar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
+                {/*
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <MenuItem key={setting} 
+                    component="button" // Change the component to "button"
+                    onClick={handleSettingsMenuItem(setting)}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
+                */}
+                <MenuItem
+                  component="button"
+                  // href={"/about"}
+                  onClick={handleNavMenuItem("signin")}
+                >
+                  <Typography textAlign="center">
+                    {Locale.Navbar.Signin}
+                  </Typography>
+                </MenuItem>
               </Menu>
             </Box>
           </Toolbar>

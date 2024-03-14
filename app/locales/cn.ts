@@ -473,7 +473,8 @@ const cn = {
     Blog: "博客",
     About: "关于",
     Help: "帮助",
-    Logout: "登出",
+    Signin: "登录",
+    Signout: "登出",
   },
 };
 
