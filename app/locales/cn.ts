@@ -474,7 +474,7 @@ const cn = {
     About: "关于",
     Help: "帮助",
     Signin: "登录",
-    Signout: "登出",
+    Signout: "再见",
   },
 };
 

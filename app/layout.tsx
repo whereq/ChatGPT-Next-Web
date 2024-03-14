@@ -10,6 +10,8 @@ import { getServerSideConfig } from "./config/server";
 import { GoogleTagManager } from "@next/third-parties/google";
 import Navbar from "./components/navbar";
 import ResponsiveAppBar from "./components/navigation/navbar";
+import { Providers } from "./Providers";
+import SessionGuard from "./components/auth/SessionGuard";
 const serverConfig = getServerSideConfig();
 
 export const metadata: Metadata = {
@@ -46,7 +48,9 @@ export default function RootLayout({
       </head>
       <body>
         <ResponsiveAppBar />
-        {children}
+        <Providers>
+          <SessionGuard>{children}</SessionGuard>
+        </Providers>
         {serverConfig?.isVercel && (
           <>
             <SpeedInsights />

@@ -474,8 +474,8 @@ const en: LocaleType = {
     Blog: "Blog",
     About: "About",
     Help: "Help",
-    Signin: "Sign in",
-    Signout: "Sign out",
+    Signin: "Sign In",
+    Signout: "See You Soon",
   },
   URLCommand: {
     Code: "Detected access code from url, confirm to apply? ",

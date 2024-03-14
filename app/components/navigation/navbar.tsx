@@ -4,7 +4,11 @@ import dynamic from "next/dynamic";
 
 import { useRouter } from "next/navigation";
 import * as React from "react";
-import { signIn } from "next-auth/react";
+// import { useState, useEffect } from 'react';
+
+import { Session, getServerSession } from "next-auth";
+import { getSession, signIn, signOut } from "next-auth/react";
+import { authOptions } from "@/app/lib/auth/auth-options";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -31,6 +35,38 @@ const pages = ["Products", "Pricing", "Blog", "About"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
+  // const session = await getServerSession(authOptions)
+
+  // Call getServerSession asynchronously using .then() method
+  const [session, setSession] = React.useState<Session | undefined>(undefined);
+  React.useEffect(() => {
+    // Fetch session data asynchronously
+    const fetchSession = async () => {
+      try {
+        // Call the method to fetch session data
+        // const sessionData = await getServerSession();
+        const sessionData = await getSession();
+        setSession(sessionData || undefined); // Update session state with a default value of undefined
+      } catch (error) {
+        console.error("Error fetching session data:", error);
+      }
+    };
+
+    fetchSession(); // Call the fetchSession function when the component mounts
+  }, []); // Empty dependency array ensures this effect runs only once
+
+  /*
+  let userName = null;
+  getServerSession(authOptions)
+    .then((session) => {
+      console.log('Session:', session)
+      userName = session?.user?.name;
+    })
+    .catch((error) => {
+      console.error('Error fetching session:', error)
+    });
+  */
+
   const router = useRouter();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -61,6 +97,8 @@ function ResponsiveAppBar() {
       console.log(menu);
       if (menu === "signin") {
         signIn("keycloak");
+      } else if (menu === "signout") {
+        signOut();
       }
     };
 
@@ -290,15 +328,27 @@ function ResponsiveAppBar() {
                   </MenuItem>
                 ))}
                 */}
-                <MenuItem
-                  component="button"
-                  // href={"/about"}
-                  onClick={handleNavMenuItem("signin")}
-                >
-                  <Typography textAlign="center">
-                    {Locale.Navbar.Signin}
-                  </Typography>
-                </MenuItem>
+                {session ? (
+                  <MenuItem
+                    component="button"
+                    // href={"/about"}
+                    onClick={handleNavMenuItem("signout")}
+                  >
+                    <Typography textAlign="center">
+                      {Locale.Navbar.Signout}
+                    </Typography>
+                  </MenuItem>
+                ) : (
+                  <MenuItem
+                    component="button"
+                    // href={"/about"}
+                    onClick={handleNavMenuItem("signin")}
+                  >
+                    <Typography textAlign="center">
+                      {Locale.Navbar.Signin}
+                    </Typography>
+                  </MenuItem>
+                )}
               </Menu>
             </Box>
           </Toolbar>
