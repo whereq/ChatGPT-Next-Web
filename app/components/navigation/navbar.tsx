@@ -33,14 +33,13 @@ import { NoSsr } from "@mui/material";
 import Locale, { getLang } from "../../locales";
 import { AuthUser } from "@/app/lib/model";
 
-const pages = ["Products", "Pricing", "Blog", "About"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { KEYCLOAK_CONFIG } from "@/app/config/keycloak";
 
 function ResponsiveAppBar() {
   // Construct the KeycloakAdminClient instance
   const kcAdminClient = new KeycloakAdminClient({
-    baseUrl: process.env.KEYCLOAK_HOST,
-    realmName: process.env.KEYCLOAK_REALM,
+    baseUrl: KEYCLOAK_CONFIG.host,
+    realmName: KEYCLOAK_CONFIG.realm,
   });
 
   // Fetch Keycloak user by email asynchronously
@@ -51,46 +50,47 @@ function ResponsiveAppBar() {
     }
   };
 
+  const [session, setSession] = React.useState<Session | undefined>(undefined);
+  const [authUser, setAuthUser] = React.useState<AuthUser | undefined>(
+    undefined,
+  );
+
+  const [keycloakUser, setKeycloakUser] = React.useState<
+    UserRepresentation | undefined
+  >(undefined);
+
   // Fetch session data asynchronously
   const fetchSession = async () => {
     try {
+      console.log("Fetching session data...");
+
       // Call the method to fetch session data
       const sessionData = await getSession();
+      console.log("Session data:", sessionData);
+
       setSession(sessionData || undefined); // Update session state with a default value of undefined
       setAuthUser(sessionData?.user || undefined); // Update authUser state with a default value of undefined
 
       // Authenticate the KeycloakAdminClient
-      /*
       await kcAdminClient.auth({
-        grantType: process.env.KEYCLOAK_GRANT_TYPE as GrantTypes,
-        clientId: process.env.KEYCLOAK_CLIENT_ID,
-        clientSecret: process.env.KEYCLOAK_CLIENT_SECRET,
+        grantType: KEYCLOAK_CONFIG.grantType as GrantTypes,
+        clientId: KEYCLOAK_CONFIG.clientId,
+        clientSecret: KEYCLOAK_CONFIG.clientSecret,
       });
-      */
 
       // Call fetchKeycloakUserByEmail when authUser is ready
-      /*
       if (sessionData?.user?.email) {
         setKeycloakUser(await fetchKeycloakUserByEmail(sessionData.user.email));
       }
-      */
     } catch (error) {
       console.error("Error fetching session data:", error);
     }
   };
 
-  const [session, setSession] = React.useState<Session | undefined>(undefined);
-  const [authUser, setAuthUser] = React.useState<AuthUser | undefined>(
-    undefined,
-  );
-  const [keycloakUser, setKeycloakUser] = React.useState<
-    UserRepresentation | undefined
-  >(undefined);
-
-  // React.useEffect(() => {
-  // When the component mounts, fetch the session data which already signed in by next-auth
-  // fetchSession();
-  // }, []); // Empty dependency array ensures this effect runs only once
+  React.useEffect(() => {
+    // When the component mounts, fetch the session data which already signed in by next-auth
+    fetchSession();
+  }, []); // Empty dependency array ensures this effect runs only once
 
   const router = useRouter();
 
@@ -329,8 +329,8 @@ function ResponsiveAppBar() {
                   {keycloakUser ? (
                     keycloakUser.attributes?.avatar?.length > 0 ? (
                       <Avatar
-                        alt="WhereQ-Owl"
-                        src={keycloakUser.attributes.avatar[0]}
+                        alt="Avatar"
+                        src={keycloakUser?.attributes?.avatar[0]}
                       />
                     ) : (
                       <Avatar alt="WhereQ-Owl" src="/images/owl.png" />
@@ -378,7 +378,7 @@ function ResponsiveAppBar() {
                 ) : (
                   <MenuItem
                     component="button"
-                    // href={"/about"}
+                    // href={"/signin"}
                     onClick={handleNavMenuItem("signin")}
                   >
                     <Typography textAlign="center">

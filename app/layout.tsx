@@ -48,6 +48,7 @@ export default function RootLayout({
       </head>
       <body>
         <ResponsiveAppBar />
+        {/* {children} */}
         <Providers>
           <SessionGuard>{children}</SessionGuard>
         </Providers>

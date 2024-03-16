@@ -8,7 +8,7 @@ import * as React from "react";
 import { Session } from "next-auth";
 import { getSession, signIn, signOut } from "next-auth/react";
 import KeycloakAdminClient from "@keycloak/keycloak-admin-client";
-import { UserRepresentation } from "@keycloak/keycloak-admin-client/lib/defs/userRepresentation";
+import UserRepresentation from "@keycloak/keycloak-admin-client/lib/defs/userRepresentation";
 import { GrantTypes } from "@keycloak/keycloak-admin-client/lib/utils/auth";
 
 import AppBar from "@mui/material/AppBar";
@@ -324,7 +324,7 @@ function ResponsiveAppBar() {
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   {keycloakUser ? (
                     keycloakUser.attributes?.avatar?.length > 0 ? (
-                      <Avatar alt="WhereQ-Owl" src={keycloakUser.attributes.avatar[0]} />
+                      <Avatar alt="Avatar" src={keycloakUser?.attributes?.avatar[0]} />
                     ) : (
                       <Avatar alt="WhereQ-Owl" src="/images/owl.png" />
                     ) 
