@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useRouter } from "next/navigation";
 import * as React from "react";
 // import { useState, useEffect } from 'react';
@@ -7,7 +8,7 @@ import * as React from "react";
 import { Session } from "next-auth";
 import { getSession, signIn, signOut } from "next-auth/react";
 import KeycloakAdminClient from "@keycloak/keycloak-admin-client";
-import UserRepresentation from "@keycloak/keycloak-admin-client/lib/defs/userRepresentation";
+import { UserRepresentation } from "@keycloak/keycloak-admin-client/lib/defs/userRepresentation";
 import { GrantTypes } from "@keycloak/keycloak-admin-client/lib/utils/auth";
 
 import AppBar from "@mui/material/AppBar";
@@ -37,19 +38,17 @@ const pages = ["Products", "Pricing", "Blog", "About"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
+
   // Construct the KeycloakAdminClient instance
-  const kcAdminClient = new KeycloakAdminClient({
-    baseUrl: process.env.KEYCLOAK_HOST,
-    realmName: process.env.KEYCLOAK_REALM,
-  });
+  const kcAdminClient = new KeycloakAdminClient({baseUrl: process.env.KEYCLOAK_HOST, realmName: process.env.KEYCLOAK_REALM});
 
   // Fetch Keycloak user by email asynchronously
   const fetchKeycloakUserByEmail = async (email: string) => {
-    const userArray = await kcAdminClient.users.find({ email: email });
+    const userArray = await kcAdminClient.users.find({email: email});
     if (userArray && userArray.length > 0) {
       return userArray[0];
     }
-  };
+  }
 
   // Fetch session data asynchronously
   const fetchSession = async () => {
@@ -80,17 +79,14 @@ function ResponsiveAppBar() {
   };
 
   const [session, setSession] = React.useState<Session | undefined>(undefined);
-  const [authUser, setAuthUser] = React.useState<AuthUser | undefined>(
-    undefined,
-  );
-  const [keycloakUser, setKeycloakUser] = React.useState<
-    UserRepresentation | undefined
-  >(undefined);
+  const [authUser, setAuthUser] = React.useState<AuthUser| undefined>(undefined);
+  const [keycloakUser, setKeycloakUser] = React.useState<UserRepresentation| undefined>(undefined);
 
   // React.useEffect(() => {
-  // When the component mounts, fetch the session data which already signed in by next-auth
-  // fetchSession();
+    // When the component mounts, fetch the session data which already signed in by next-auth
+    // fetchSession(); 
   // }, []); // Empty dependency array ensures this effect runs only once
+
 
   const router = useRouter();
 
@@ -328,13 +324,10 @@ function ResponsiveAppBar() {
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   {keycloakUser ? (
                     keycloakUser.attributes?.avatar?.length > 0 ? (
-                      <Avatar
-                        alt="WhereQ-Owl"
-                        src={keycloakUser.attributes.avatar[0]}
-                      />
+                      <Avatar alt="WhereQ-Owl" src={keycloakUser.attributes.avatar[0]} />
                     ) : (
                       <Avatar alt="WhereQ-Owl" src="/images/owl.png" />
-                    )
+                    ) 
                   ) : (
                     <Avatar alt="WhereQ-Unkown" src="/images/unkown.png" />
                   )}
