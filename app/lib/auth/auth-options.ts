@@ -70,6 +70,11 @@ export const authOptions: AuthOptions = {
     async session({ session, token }) {
       session.accessToken = token.accessToken;
       session.error = token.error;
+
+      // Set the user id from the token.sub
+      if (session.user) {
+        session.user.id = token.sub;
+      }
       return session;
     },
   },

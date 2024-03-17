@@ -19,6 +19,8 @@ const en: LocaleType = {
     Input: "access code",
     Confirm: "Confirm",
     Later: "Later",
+    ConfirmSignout: (name: string) =>
+      `Hey ${name}, hold on... are you sure to sign out?`,
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} messages`,
@@ -469,6 +471,7 @@ const en: LocaleType = {
     Time: "Time",
   },
   Navbar: {
+    Open: "Open Settings",
     Products: "Products",
     Pricing: "Pricing",
     Blog: "Blog",

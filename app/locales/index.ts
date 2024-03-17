@@ -102,11 +102,11 @@ function setItem(key: string, value: string) {
 
 function getLanguage() {
   try {
-    // Change the default language to cn here
-    // return navigator.language.toLowerCase();
-    // return DEFAULT_LANG;
+    // Return the language according to the default browser settings
+    return navigator.language.toLowerCase();
 
-    return DEFAULT_LANG;
+    // Change the default language to cn here
+    // return DEFAULT_LANG;
   } catch {
     return DEFAULT_LANG;
   }

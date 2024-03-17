@@ -17,6 +17,7 @@ const cn = {
     Input: "在此处填写访问码",
     Confirm: "确认",
     Later: "稍后再说",
+    ConfirmSignout: (name: string) => `嗨 ${name}， 等会儿... 您确认退出么？`,
   },
   ChatItem: {
     ChatItemCount: (count: number) => `${count} 条对话`,
@@ -468,6 +469,7 @@ const cn = {
     Time: "时间",
   },
   Navbar: {
+    Open: "打开设置",
     Products: "产品",
     Pricing: "价格",
     Blog: "博客",

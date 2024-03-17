@@ -42,6 +42,11 @@ function ResponsiveAppBar() {
     realmName: KEYCLOAK_CONFIG.realm,
   });
 
+  // Fetch Keycloak user by Id asynchronously
+  const fetchKeycloakUserById = async (userId: string) => {
+    return await kcAdminClient.users.findOne({ id: userId });
+  };
+
   // Fetch Keycloak user by email asynchronously
   const fetchKeycloakUserByEmail = async (email: string) => {
     const userArray = await kcAdminClient.users.find({ email: email });
@@ -78,9 +83,9 @@ function ResponsiveAppBar() {
         clientSecret: KEYCLOAK_CONFIG.clientSecret,
       });
 
-      // Call fetchKeycloakUserByEmail when authUser is ready
-      if (sessionData?.user?.email) {
-        setKeycloakUser(await fetchKeycloakUserByEmail(sessionData.user.email));
+      // Call fetchKeycloakUserById when authUser is ready
+      if (sessionData?.user?.id) {
+        setKeycloakUser(await fetchKeycloakUserById(sessionData.user.id));
       }
     } catch (error) {
       console.error("Error fetching session data:", error);
@@ -324,7 +329,7 @@ function ResponsiveAppBar() {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
+              <Tooltip title={Locale.Navbar.Open}>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   {keycloakUser ? (
                     keycloakUser.attributes?.avatar?.length > 0 ? (

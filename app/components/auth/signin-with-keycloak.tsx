@@ -1,5 +1,8 @@
 "use client";
 import { signIn } from "next-auth/react";
+
+import Locale from "../../locales";
+
 export default function signinWithKeycloak() {
   return (
     <button
@@ -9,7 +12,7 @@ export default function signinWithKeycloak() {
         })
       }
     >
-      Signin with keycloak
+      {Locale.Navbar.Signin}
     </button>
   );
 }
