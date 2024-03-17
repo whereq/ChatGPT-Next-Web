@@ -123,10 +123,16 @@ function ResponsiveAppBar() {
   };
 
   const handleNavMenuItem =
-    (menu: string) => (event: React.MouseEvent<HTMLButtonElement>) => {
+    (menu: string) => async (event: React.MouseEvent<HTMLButtonElement>) => {
       if (menu === "signin") {
         // signIn("keycloak");
-        router.push("auth/signin");
+        // router.push("auth/signin");
+
+        const sessionData = await getSession();
+        if (sessionData) {
+          router.push("/");
+        }
+        signIn("keycloak");
       } else if (menu === "signout") {
         // signOut();
         router.push("auth/signout");
