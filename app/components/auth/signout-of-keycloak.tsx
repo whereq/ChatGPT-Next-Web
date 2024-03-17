@@ -1,5 +1,7 @@
 "use client";
-import { signOut } from "next-auth/react";
+import federatedSignOut from "@/app/utils/federated-signout";
 export default function SignoutOfKeycloak() {
-  return <button onClick={() => signOut()}>Signout of keycloak</button>;
+  return (
+    <button onClick={() => federatedSignOut()}>Signout of keycloak</button>
+  );
 }
