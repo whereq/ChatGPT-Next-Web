@@ -344,7 +344,7 @@ function ResponsiveAppBar() {
                         src={keycloakUser?.attributes?.avatar[0]}
                       />
                     ) : (
-                      <Avatar alt="WhereQ-Owl" src="/images/owl.png" />
+                      <Avatar alt="WhereQ-Owl" src="/images/owl-128x128.png" />
                     )
                   ) : (
                     <Avatar alt="WhereQ-Unkown" src="/images/unkown.png" />

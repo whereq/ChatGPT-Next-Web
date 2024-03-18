@@ -5,3 +5,7 @@
 
 ## Solution
 [No SSR](https://mui.com/base-ui/react-no-ssr/)
+
+
+# Calculate tokens when stream=true
+[tiktoken](https://www.npmjs.com/package/tiktoken)

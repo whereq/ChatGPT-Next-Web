@@ -366,6 +366,7 @@ export const useChatStore = createPersistStore(
             });
           },
           onFinish(message) {
+            console.log("[Chat] finished ", message);
             botMessage.streaming = false;
             if (message) {
               botMessage.content = message;
@@ -559,6 +560,7 @@ export const useChatStore = createPersistStore(
               model: getSummarizeModel(session.mask.modelConfig.model),
             },
             onFinish(message) {
+              console.log("summarizeSession ", message);
               get().updateCurrentSession(
                 (session) =>
                   (session.topic =

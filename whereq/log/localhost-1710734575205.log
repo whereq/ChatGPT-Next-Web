@@ -1,0 +1,47 @@
+Fetch event handler is recognized as no-op. No-op fetch handler may bring overhead during navigation. Consider removing the handler if possible.
+serviceWorkerRegister.js:4 ServiceWorker registration successful with scope:  http://localhost:3000/
+navbar.tsx:70 Fetching session data...
+home.tsx:207 [Config] got config from build time Object
+home.tsx:62 loading mask
+hot-reloader-client.js:154 [Fast Refresh] rebuilding
+access.ts:95 [Config] got config from server Object
+navbar.tsx:74 Session data: null
+chat.tsx:812 [Mask] syncing from global, name =  新的聊天
+chat.ts:298 [User Input] after template:  汉译英"一"
+chat.ts:450 [Global System Prompt]  
+You are ChatGPT, a large language model trained by OpenAI.
+Knowledge cutoff: 2021-09
+Current model: gpt-3.5-turbo
+Current time: 3/17/2024, 11:27:25 PM
+Latex inline: $x^2$ 
+Latex block: $$e=mc^2$$
+
+
+openai.ts:123 [Request] openai payload:  {messages: Array(3), stream: true, model: 'gpt-3.5-turbo', temperature: 0.5, presence_penalty: 0, …}
+openai.ts:77 [Proxy Endpoint]  /api/openai v1/chat/completions
+openai.ts:185 [OpenAI] request response content type:  text/event-stream
+chat.ts:369 [Chat] finished  The Chinese word "一" can be translated to English as "one."
+chat.ts:594 [Chat History]  (3) [{…}, {…}, {…}] 26.75 1000
+openai.ts:153 [Response Animation] finished
+:3000/#/chat:1 Error handling response: TypeError: Cannot read properties of undefined (reading 'success')
+    at chrome-extension://cgdjpilhipecahhcilnafpblkieebhea/s2k-listener.js:13833:30
+:3000/#/chat:1 Unchecked runtime.lastError: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+chat.ts:298 [User Input] after template:  explain next.js in 20 words
+chat.ts:450 [Global System Prompt]  
+You are ChatGPT, a large language model trained by OpenAI.
+Knowledge cutoff: 2021-09
+Current model: gpt-3.5-turbo
+Current time: 3/17/2024, 11:59:21 PM
+Latex inline: $x^2$ 
+Latex block: $$e=mc^2$$
+
+
+openai.ts:123 [Request] openai payload:  {messages: Array(5), stream: true, model: 'gpt-3.5-turbo', temperature: 0.5, presence_penalty: 0, …}
+openai.ts:77 [Proxy Endpoint]  /api/openai v1/chat/completions
+openai.ts:185 [OpenAI] request response content type:  text/event-stream
+chat.ts:369 [Chat] finished  Next.js is a React framework for building web applications with server-side rendering, routing, and other powerful features.
+openai.ts:123 [Request] openai payload:  {messages: Array(5), stream: undefined, model: 'gpt-3.5-turbo', temperature: 0.5, presence_penalty: 0, …}frequency_penalty: 0messages: Array(5)0: {role: 'user', content: '汉译英"一"'}1: {role: 'assistant', content: 'The Chinese word "一" can be translated to English as "one."'}2: {role: 'user', content: 'explain next.js in 20 words'}3: {role: 'assistant', content: 'Next.js is a React framework for building web appl… rendering, routing, and other powerful features.'}4: {role: 'user', content: '使用四到五个字直接返回这句话的简要主题，不要解释、不要标点、不要语气词、不要多余文本，不要加粗，如果没有主题，请直接返回“闲聊”'}length: 5[[Prototype]]: Array(0)model: "gpt-3.5-turbo"presence_penalty: 0stream: undefinedtemperature: 0.5top_p: 1[[Prototype]]: Object
+openai.ts:77 [Proxy Endpoint]  /api/openai v1/chat/completions
+chat.ts:594 [Chat History]  (5) [{…}, {…}, {…}, {…}, {…}] 71.5 1000
+chat.ts:563 summarizeSession  建筑设计。
+openai.ts:153 [Response Animation] finished
