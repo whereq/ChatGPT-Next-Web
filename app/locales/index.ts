@@ -72,12 +72,12 @@ export const ALL_LANG_OPTIONS: Record<Lang, string> = {
 
 const LANG_KEY = "lang";
 
-// Change the default language to cn here
-// const DEFAULT_LANG = "en";
-// const fallbackLang = en;
+const DEFAULT_LANG = "en";
+const fallbackLang = en;
 
-const DEFAULT_LANG = "cn";
-const fallbackLang = cn;
+// Change the default language to cn here
+// const DEFAULT_LANG = "cn";
+// const fallbackLang = cn;
 
 const targetLang = ALL_LANGS[getLang()] as LocaleType;
 

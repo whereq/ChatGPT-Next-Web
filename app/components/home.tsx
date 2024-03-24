@@ -29,6 +29,7 @@ import { AuthPage } from "./auth";
 import { getClientConfig } from "../config/client";
 import { ClientApi } from "../client/api";
 import { useAccessStore } from "../store";
+import { NoSsr } from "@mui/material";
 
 export function Loading(props: { noLogo?: boolean }) {
   return (
@@ -214,9 +215,11 @@ export function Home() {
 
   return (
     <ErrorBoundary>
+      {/* <NoSsr> */}
       <Router>
         <Screen />
       </Router>
+      {/* </NoSsr> */}
     </ErrorBoundary>
   );
 }
