@@ -1,13 +1,14 @@
+import { KEYCLOAK_CONFIG } from "@/app/config/keycloak";
 import { AuthOptions, TokenSet } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import KeycloakProvider from "next-auth/providers/keycloak";
 
 function requestRefreshOfAccessToken(token: JWT) {
-  return fetch(`${process.env.KEYCLOAK_ISSUER}/protocol/openid-connect/token`, {
+  return fetch(`${KEYCLOAK_CONFIG.issuer}/protocol/openid-connect/token`, {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({
-      client_id: process.env.KEYCLOAK_CLIENT_ID,
-      client_secret: process.env.KEYCLOAK_CLIENT_SECRET,
+      client_id: KEYCLOAK_CONFIG.clientId,
+      client_secret: KEYCLOAK_CONFIG.clientSecret,
       grant_type: "refresh_token",
       refresh_token: token.refreshToken!,
     }),
@@ -19,9 +20,9 @@ function requestRefreshOfAccessToken(token: JWT) {
 export const authOptions: AuthOptions = {
   providers: [
     KeycloakProvider({
-      clientId: process.env.KEYCLOAK_CLIENT_ID,
-      clientSecret: process.env.KEYCLOAK_CLIENT_SECRET,
-      issuer: process.env.KEYCLOAK_ISSUER,
+      clientId: KEYCLOAK_CONFIG.clientId,
+      clientSecret: KEYCLOAK_CONFIG.clientSecret,
+      issuer: KEYCLOAK_CONFIG.issuer,
     }),
   ],
   pages: {

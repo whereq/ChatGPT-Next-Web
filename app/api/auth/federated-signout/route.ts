@@ -1,10 +1,11 @@
+import { KEYCLOAK_CONFIG } from "@/app/config/keycloak";
 import { JWT, getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
 function signoutParams(token: JWT): Record<string, string> {
   return {
     id_token_hint: token.idToken as string,
-    post_logout_redirect_uri: process.env.NEXTAUTH_URL || "",
+    post_logout_redirect_uri: KEYCLOAK_CONFIG.nextAuthUrl || "",
   };
 }
 
@@ -16,7 +17,7 @@ function handleEmptyToken() {
 
 function sendEndSessionEndpointToURL(token: JWT) {
   const endSessionEndPoint = new URL(
-    `${process.env.KEYCLOAK_ISSUER}/protocol/openid-connect/logout`,
+    `${KEYCLOAK_CONFIG.issuer}/protocol/openid-connect/logout`,
   );
   const params: Record<string, string> = signoutParams(token);
   const endSessionParams = new URLSearchParams(params);
