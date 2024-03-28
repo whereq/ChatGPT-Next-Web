@@ -7,7 +7,7 @@ export const KEYCLOAK_CLIENT_ID = "Vegeta";
 // export const KEYCLOAK_ISSUER = "http://localhost:8080/realms/whereq";
 
 export const KEYCLOAK_HOST = "https://keytomarvel.com";
-export const KEYCLOAK_CLIENT_SECRET = "7nFInd42hPl1Uz9jkepZpCm7n0OPQVCK";
+export const KEYCLOAK_CLIENT_SECRET = "YTx9Oa9uYkSRV3HvQ56RYGF9RovGZJrl";
 export const KEYCLOAK_ISSUER = "https://keytomarvel.com/realms/whereq";
 
 export const NEXTAUTH_URL = "http://localhost:3000";
