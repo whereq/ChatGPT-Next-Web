@@ -23,6 +23,10 @@ const DEFAULT_ACCESS_STATE = {
 
   provider: ServiceProvider.OpenAI,
 
+  // whereq-llm
+  // whereqLlmUrl: "http://localhost:8080/api/openai/mock/",
+  whereqLlmUrl: "http://localhost:8080/",
+
   // openai
   openaiUrl: DEFAULT_OPENAI_URL,
   openaiApiKey: "",

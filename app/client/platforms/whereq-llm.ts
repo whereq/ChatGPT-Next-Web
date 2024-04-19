@@ -6,6 +6,7 @@ import {
   OpenaiPath,
   REQUEST_TIMEOUT_MS,
   ServiceProvider,
+  WhereQLlmPath,
 } from "@/app/constant";
 import { useAccessStore, useAppConfig, useChatStore } from "@/app/store";
 
@@ -24,7 +25,7 @@ import {
 } from "@fortaine/fetch-event-source";
 import { prettyObject } from "@/app/utils/format";
 import { getClientConfig } from "@/app/config/client";
-import { makeAzurePath } from "@/app/azure";
+
 import {
   getMessageTextContent,
   getMessageImages,
@@ -46,23 +47,13 @@ export class WhereQLLMApi implements LLMApi {
   path(path: string): string {
     const accessStore = useAccessStore.getState();
 
-    let baseUrl = accessStore.openaiUrl;
-
-    if (baseUrl.length === 0) {
-      const isApp = !!getClientConfig()?.isApp;
-      baseUrl = isApp
-        ? DEFAULT_API_HOST + "/proxy" + ApiPath.OpenAI
-        : ApiPath.OpenAI;
-    }
+    let baseUrl = accessStore.whereqLlmUrl;
 
     if (baseUrl.endsWith("/")) {
       baseUrl = baseUrl.slice(0, baseUrl.length - 1);
     }
-    if (!baseUrl.startsWith("http") && !baseUrl.startsWith(ApiPath.OpenAI)) {
-      baseUrl = "https://" + baseUrl;
-    }
 
-    console.log("[Proxy Endpoint] ", baseUrl, path);
+    console.log("[WhereQ-LLM Endpoint] ", baseUrl, path);
 
     return [baseUrl, path].join("/");
   }
@@ -115,7 +106,7 @@ export class WhereQLLMApi implements LLMApi {
     options.onController?.(controller);
 
     try {
-      const chatPath = this.path(OpenaiPath.ChatPath);
+      const chatPath = this.path(WhereQLlmPath.ChatPath);
       const chatPayload = {
         method: "POST",
         body: JSON.stringify(requestPayload),
@@ -275,7 +266,7 @@ export class WhereQLLMApi implements LLMApi {
           headers: getHeaders(),
         },
       ),
-      fetch(this.path(OpenaiPath.SubsPath), {
+      fetch(this.path(WhereQLlmPath.SubsPath), {
         method: "GET",
         headers: getHeaders(),
       }),
@@ -324,7 +315,7 @@ export class WhereQLLMApi implements LLMApi {
       return DEFAULT_MODELS.slice();
     }
 
-    const res = await fetch(this.path(OpenaiPath.ListModelPath), {
+    const res = await fetch(this.path(WhereQLlmPath.ListModelPath), {
       method: "GET",
       headers: {
         ...getHeaders(),
@@ -343,9 +334,9 @@ export class WhereQLLMApi implements LLMApi {
       name: m.id,
       available: true,
       provider: {
-        id: "openai",
-        providerName: "OpenAI",
-        providerType: "openai",
+        id: "whereq-llm",
+        providerName: "WhereQ-LLM",
+        providerType: "whereq-llm",
       },
     }));
   }

@@ -74,6 +74,13 @@ export enum ModelProvider {
   GeminiPro = "GeminiPro",
 }
 
+export const WhereQLlmPath = {
+  ChatPath: "v1/chat/completions",
+  UsagePath: "dashboard/billing/usage",
+  SubsPath: "dashboard/billing/subscription",
+  ListModelPath: "v1/models",
+};
+
 export const OpenaiPath = {
   ChatPath: "v1/chat/completions",
   UsagePath: "dashboard/billing/usage",
