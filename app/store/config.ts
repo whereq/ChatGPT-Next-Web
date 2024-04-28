@@ -46,8 +46,11 @@ export const DEFAULT_CONFIG = {
   customModels: "",
   models: DEFAULT_MODELS as any as LLMModel[],
 
+  // The model configuration will be cached in local storage with key "app-config",
+  // so change the value here won't affect the model configuration in runtime because runtime actually load configuration from local storage.
   modelConfig: {
-    model: "gpt-3.5-turbo" as ModelType,
+    // model: "gpt-3.5-turbo" as ModelType,
+    model: "whereq-llm" as ModelType,
     temperature: 0.5,
     top_p: 1,
     max_tokens: 4000,

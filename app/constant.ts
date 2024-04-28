@@ -76,6 +76,7 @@ export enum ModelProvider {
   GPT = "GPT",
   GeminiPro = "GeminiPro",
   Claude = "Claude",
+  WhereQ = "WhereQ",
 }
 
 export const WhereQLlmPath = {
@@ -182,6 +183,8 @@ const anthropicModels = [
   "claude-3-haiku-20240307",
 ];
 
+const whereqModels = ["whereq-llm"];
+
 export const DEFAULT_MODELS = [
   ...openaiModels.map((name) => ({
     name,
@@ -208,6 +211,15 @@ export const DEFAULT_MODELS = [
       id: "anthropic",
       providerName: "Anthropic",
       providerType: "anthropic",
+    },
+  })),
+  ...whereqModels.map((name) => ({
+    name,
+    available: true,
+    provider: {
+      id: "whereq",
+      providerName: "WhereQ",
+      providerType: "whereq",
     },
   })),
 ] as const;

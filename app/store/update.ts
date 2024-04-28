@@ -143,6 +143,7 @@ export const useUpdateStore = createPersistStore(
       }));
 
       try {
+        // TODO: support other providers e.g. whereq
         const api = new ClientApi(ModelProvider.GPT);
         const usage = await api.llm.usage();
 

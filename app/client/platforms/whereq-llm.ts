@@ -341,4 +341,4 @@ export class WhereQLLMApi implements LLMApi {
     }));
   }
 }
-export { OpenaiPath };
+// export { OpenaiPath };

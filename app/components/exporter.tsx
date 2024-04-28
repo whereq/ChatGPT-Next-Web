@@ -318,6 +318,8 @@ export function PreviewActions(props: {
       api = new ClientApi(ModelProvider.GeminiPro);
     } else if (identifyDefaultClaudeModel(config.modelConfig.model)) {
       api = new ClientApi(ModelProvider.Claude);
+    } else if (config.modelConfig.model.startsWith("whereq")) {
+      api = new ClientApi(ModelProvider.WhereQ);
     } else {
       api = new ClientApi(ModelProvider.GPT);
     }

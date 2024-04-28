@@ -9,6 +9,7 @@ import { ChatMessage, ModelType, useAccessStore, useChatStore } from "../store";
 import { ChatGPTApi } from "./platforms/openai";
 import { GeminiProApi } from "./platforms/google";
 import { ClaudeApi } from "./platforms/anthropic";
+import { WhereQLLMApi } from "./platforms/whereq-llm";
 export const ROLES = ["system", "user", "assistant"] as const;
 export type MessageRole = (typeof ROLES)[number];
 
@@ -102,6 +103,10 @@ export class ClientApi {
       case ModelProvider.Claude:
         this.llm = new ClaudeApi();
         break;
+      case ModelProvider.GPT:
+        this.llm = new ChatGPTApi();
+      case ModelProvider.WhereQ:
+        this.llm = new WhereQLLMApi();
       default:
         this.llm = new ChatGPTApi();
     }
