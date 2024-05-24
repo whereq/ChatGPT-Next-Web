@@ -79,7 +79,7 @@ export enum ModelProvider {
   WhereQ = "WhereQ",
 }
 
-export const WhereQLlmPath = {
+export const WhereQLLMPath = {
   ChatPath: "v1/chat/completions",
   UsagePath: "dashboard/billing/usage",
   SubsPath: "dashboard/billing/subscription",

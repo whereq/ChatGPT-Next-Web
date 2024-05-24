@@ -6,7 +6,7 @@ import {
   OpenaiPath,
   REQUEST_TIMEOUT_MS,
   ServiceProvider,
-  WhereQLlmPath,
+  WhereQLLMPath,
 } from "@/app/constant";
 import { useAccessStore, useAppConfig, useChatStore } from "@/app/store";
 
@@ -99,14 +99,14 @@ export class WhereQLLMApi implements LLMApi {
       });
     }
 
-    console.log("[Request] openai payload: ", requestPayload);
+    console.log("[Request] whereq-llm payload: ", requestPayload);
 
     const shouldStream = !!options.config.stream;
     const controller = new AbortController();
     options.onController?.(controller);
 
     try {
-      const chatPath = this.path(WhereQLlmPath.ChatPath);
+      const chatPath = this.path(WhereQLLMPath.ChatPath);
       const chatPayload = {
         method: "POST",
         body: JSON.stringify(requestPayload),
@@ -165,7 +165,7 @@ export class WhereQLLMApi implements LLMApi {
             clearTimeout(requestTimeoutId);
             const contentType = res.headers.get("content-type");
             console.log(
-              "[OpenAI] request response content type: ",
+              "[WhereQ-Llm] request response content type: ",
               contentType,
             );
 
@@ -266,7 +266,7 @@ export class WhereQLLMApi implements LLMApi {
           headers: getHeaders(),
         },
       ),
-      fetch(this.path(WhereQLlmPath.SubsPath), {
+      fetch(this.path(WhereQLLMPath.SubsPath), {
         method: "GET",
         headers: getHeaders(),
       }),
@@ -277,7 +277,7 @@ export class WhereQLLMApi implements LLMApi {
     }
 
     if (!used.ok || !subs.ok) {
-      throw new Error("Failed to query usage from openai");
+      throw new Error("Failed to query usage from Whereq-Llm");
     }
 
     const response = (await used.json()) as {
@@ -315,7 +315,7 @@ export class WhereQLLMApi implements LLMApi {
       return DEFAULT_MODELS.slice();
     }
 
-    const res = await fetch(this.path(WhereQLlmPath.ListModelPath), {
+    const res = await fetch(this.path(WhereQLLMPath.ListModelPath), {
       method: "GET",
       headers: {
         ...getHeaders(),
