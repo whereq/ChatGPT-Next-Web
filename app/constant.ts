@@ -174,6 +174,7 @@ const anthropicModels = [
   "claude-3-sonnet-20240229",
   "claude-3-opus-20240229",
   "claude-3-haiku-20240307",
+  "claude-3-5-sonnet-20240620",
 ];
 
 const whereqModels = ["whereq-llm"];
@@ -226,6 +227,7 @@ export const internalAllowedWebDavEndpoints = [
   "https://dav.dropdav.com/",
   "https://dav.box.com/dav",
   "https://nanao.teracloud.jp/dav/",
+  "https://bora.teracloud.jp/dav/",
   "https://webdav.4shared.com/",
   "https://dav.idrivesync.com",
   "https://webdav.yandex.com",
